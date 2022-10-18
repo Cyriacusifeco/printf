@@ -14,7 +14,9 @@ int _printf(const char *format, ...)
 	char character;
 	va_list list;
 	va_start(list, format);
-
+	
+	if (format == NULL)
+		return (-1);
 	for (ptr = format; *ptr; ptr++)
 	{
 		if (*ptr != '%')
@@ -30,7 +32,6 @@ int _printf(const char *format, ...)
 				_putchar(character);
 				count++;
 				break;
-
 			case 's':
 				for (string = va_arg(list, char *); *string; string++)
 				{
@@ -38,19 +39,16 @@ int _printf(const char *format, ...)
 					count++;
 				}
 					break;
-
 			case 'd':
 				integer = va_arg(list, int);
 				_putchar(integer);
 				count++;
 				break;
-
 			case 'f':
 				fp = va_arg(list, double);
 				_putchar(fp);
 				count++;
 				break;
-
 			default:
 				_putchar(*ptr);
 				count++;
